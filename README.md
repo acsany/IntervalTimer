@@ -1,4 +1,6 @@
-# intervaltimer
+# IntervalTimer
+
+A simple VueJS timer app. For pancakes … or workouts.
 
 ## Project setup
 ```
