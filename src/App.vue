@@ -1,7 +1,7 @@
 <template>
   <div class="container">
         <header>
-            <h1>Interval Timer</h1>
+            <h1>⏳ Interval Timer</h1>
             <p>A simple timer. Perfect for workouts or baking pancakes.</p>
         </header>
         <main>
