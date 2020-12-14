@@ -32,7 +32,7 @@
                 </fieldset>
             </form>
             <p>
-                <small>Total duration: {{durationSeconds}}s</small>
+                <small>Total duration: {{niceTimeFormat(durationSeconds)}}</small>
             </p>
         </main>
         <section>
@@ -64,7 +64,7 @@
             <p class="ui-super-jumbo">
                 {{intervalTimerCount}}s
             </p>
-            <p class="ui-jumbo">{{totalTimerCount}}/{{durationSeconds}}s</p>
+            <p class="ui-jumbo">{{niceTimeFormat(totalTimerCount)}} of {{niceTimeFormat(durationSeconds)}} left</p>
             <p class="ui-center">
                 <template v-for="repetition in repetitions"  v-bind:key="repetition.id">
                     <span v-if="repetition == activeInterval">✹</span>
@@ -89,7 +89,7 @@
 
             <p class="ui-jumbo">
                 🎉<br>
-                {{repetitions}}/{{repetitions}} sets in {{durationSeconds}} seconds done!
+                {{repetitions}}/{{repetitions}} sets in {{niceTimeFormat(durationSeconds)}} done!
             </p>
 
             <button @click="resetTimer;timerComplete = !timerComplete" class="ui-border">
@@ -182,7 +182,25 @@ export default {
                     }
                 }, 1000);
             }
-        }
+        },
+        niceTimeFormat(duration) {
+            // See: https://stackoverflow.com/a/11486026/6334616
+            // Hours, minutes and seconds
+            var hrs = Math.floor(duration / 3600);
+            var mins = Math.floor((duration % 3600) / 60);
+            var secs = Math.floor(duration % 60);
+
+            // Output like "1:01" or "4:03:59" or "123:03:59"
+            var ret = "";
+
+            if (hrs > 0) {
+                ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+            }
+
+            ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+            ret += "" + secs;
+            return ret;
+        },
     }
 }
 </script>
